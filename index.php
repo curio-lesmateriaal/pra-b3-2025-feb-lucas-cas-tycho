@@ -10,9 +10,12 @@
 </head>
 <body>
 
-    <div class="navbar">
-        <a href="index.php">HOME</a>
-        <a href="inlog-page.php">LOG IN</a>
+<div class="navbar">
+        <img src="img/logo-big-v4.png" alt="LOGO">
+        <div class="menu">
+            <a href="index.php">HOME</a>
+            <a href="inlog-page.php">LOG IN</a>
+        </div>
     </div>
 
     <div class="container">

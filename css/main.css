@@ -1,56 +1,107 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
 .navbar {
-    display: flex;
-    justify-content: flex-end;
-    padding: 23px 20px;
-    border-bottom: 2px solid black;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 15px 30px;
+  background-color: white;
+  border-bottom: 3px solid black;
+  position: relative;
 }
-.navbar a {
-    margin-right: 25px;
-    text-decoration: none;
-    color: black;
-    font-size: 20px;
+
+.navbar img {
+  width: 200px;
+  position: absolute;
+  left: 50%; 
+  transform: translateX(-50%);
 }
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-    margin: 20px;
-}
+
 .logo {
-    font-size: 50px;
-    font-weight: bold;
-}
-.button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: 2px solid black;
-    background-color: white;
-    cursor: pointer;
-    font-size: 30px;
-}
-.button:hover {
-    background-color: lightgray;
+  max-height: 50px; 
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .headerimg{
   
 }
 
+.menu {
+  display: flex;
+  gap: 20px;
+  margin-left: auto; 
+}
 
+.menu a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 10px;
+}
 
+.menu a:hover {
+  color: purple;
+  text-decoration: underline;
+}
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  margin: 20px;
+  padding: 20px;
+}
 
+h1, h2 {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
 
+button {
+  padding: 10px 15px;
+  border: 2px solid black;
+  background-color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px;
+}
 
+button:hover {
+  background-color: lightgray;
+}
 
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
 
+label {
+  text-align: left;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
 
 
