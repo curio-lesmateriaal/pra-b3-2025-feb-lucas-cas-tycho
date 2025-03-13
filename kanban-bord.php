@@ -11,15 +11,26 @@
 
 <header>
 
+<div class="navbar">
+        <p>klantenservice</p>
+        <img src="img/logo-big-v4.png" alt="LOGO">
+        <div class="menu">
+            <a href="index.php">HOME</a>
+            <a href="inlog-page.php">LOG IN</a>
+        </div>
+</header>
 
-<img src="img/logo-big-v4.png" alt="">
 
 <body>
-
-    <div class="navbar">
-        <a href="index.php">HOME</a>
-        <a href="inlog-page.php">LOG IN</a>
-    </div>
-    <p></p>
+<select name='Afdeling' id="Afdeling">
+            <option valua=""> - kies je afdeling - </option>
+            <option valua=""> - afdeling 1 - </option>
+            <option valua=""> - afdeling 2 - </option>
+            <option valua=""> - afdeling 3- </option>
+            <option valua=""> - afdeling 4- </option>
+            <option valua=""> - afdeling 5- </option>
+            <option valua=""> - afdeling 6- </option>
+            <option valua=""> - afdeling 7- </option>
+            <option valua=""> - afdeling 8- </option>
 </body>
 </html>
