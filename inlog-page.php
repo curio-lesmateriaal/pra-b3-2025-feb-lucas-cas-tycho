@@ -13,8 +13,8 @@
     <div class="navbar">
         <img src="img/logo-big-v4.png" alt="">
         <div class="menu">
-            <a href="index.html">HOME</a>
-            <a href="login.html">LOG IN</a>
+            <a href="index.php">HOME</a>
+            <a href="inlog-page.php">LOG IN</a>
         </div>
     </div>
 
@@ -28,8 +28,8 @@
             <input type="password" id="wachtwoord" name="wachtwoord" required>
 
             <div class="buttons">
-                <button type="button" onclick="window.location.href='register.html'">account maken</button>
-                <button type="submit">log in</button>
+                <button type="button" onclick="window.location.href='account-aanmaken.php'">account maken</button>
+                <button type="submit" onclick="window.location.href='kanban-bord.php'">log in</button>
             </div>
         </form>
     </div>

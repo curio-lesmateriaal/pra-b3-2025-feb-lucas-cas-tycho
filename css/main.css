@@ -27,9 +27,6 @@ body {
   left: 50%;
   transform: translateX(-50%);
 }
-.headerimg{
-  
-}
 
 .menu {
   display: flex;
