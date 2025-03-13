@@ -12,7 +12,8 @@
 <header>
 
 <div class="navbar">
-        <p>klantenservice</p>
+        <h3>KLANTENSERVICE</h3>
+        <button class="button" href='klantenservice.php'></button>
         <img src="img/logo-big-v4.png" alt="LOGO">
         <div class="menu">
             <a href="index.php">HOME</a>
