@@ -14,7 +14,7 @@
         <img src="img/logo-big-v4.png" alt="LOGO">
         <div class="menu">
             <a href="index.php">HOME</a>
-            <a href="inlog-page.php">LOG IN</a>
+            <a href="inlog-page.php">INLOGGEN</a>
         </div>
     </div>
 

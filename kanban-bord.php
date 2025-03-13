@@ -1,36 +1,41 @@
+<!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php require_once 'backend/config.php'; ?>
-    <title>Home</title>
+    <title>Kanban Bord</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
-
 </head>
-
-<header>
-
-<div class="navbar">
-        <p>klantenservice</p>
-        <img src="img/logo-big-v4.png" alt="LOGO">
+<body>
+    <div class="navbar">
+        <h3>Klantenservice</h3> 
+        <img src="img/logo-big-v4.png" alt="Logo">
         <div class="menu">
             <a href="index.php">HOME</a>
-            <a href="inlog-page.php">LOG IN</a>
+            <a href="inlog-page.php">INLOGGEN</a>
         </div>
-</header>
+    </div>
 
-
-<body>
-<select name='Afdeling' id="Afdeling">
-            <option valua=""> - kies je afdeling - </option>
-            <option valua=""> - afdeling 1 - </option>
-            <option valua=""> - afdeling 2 - </option>
-            <option valua=""> - afdeling 3- </option>
-            <option valua=""> - afdeling 4- </option>
-            <option valua=""> - afdeling 5- </option>
-            <option valua=""> - afdeling 6- </option>
-            <option valua=""> - afdeling 7- </option>
-            <option valua=""> - afdeling 8- </option>
+    <div class="kanban-container">
+        <div class="kanban-board">
+            <div class="kanban-column">
+                <h2>TO DO</h2>
+                <div class="task">Taak 1 <span class="delete-task">✖</span></div>
+                <div class="task">Taak 2 <span class="delete-task">✖</span></div>
+                <div class="task">Taak 3 <span class="delete-task">✖</span></div>
+                <button class="add-task">+</button>
+            </div>
+            <div class="kanban-column">
+                <h2>in progress</h2>
+                <button class="add-task">+</button>
+            </div>
+            <div class="kanban-column">
+                <h2>DONE</h2>
+                <button class="add-task">+</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
