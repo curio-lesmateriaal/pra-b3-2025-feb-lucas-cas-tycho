@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-    <div class="navbar">
-        <h3>Klantenservice</h3> 
-        <img src="img/logo-big-v4.png" alt="Logo">
+
+
+
+<header>
+
+<div class="navbar">
+        <h3>KLANTENSERVICE</h3>
+        <button class="button" href='klantenservice.php'></button>
+        <img src="img/logo-big-v4.png" alt="LOGO">
         <div class="menu">
             <a href="index.php">HOME</a>
             <a href="inlog-page.php">INLOGGEN</a>
