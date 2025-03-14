@@ -49,6 +49,17 @@ header {
   color: rgb(65, 62, 65);
   text-decoration: underline;
 }
+.menu a[href="kanban-bord.php"] {
+  border: 2px solid #3d3f43f9;
+  padding: 8px 12px;
+  border-radius: 10px; 
+  display: inline-block; 
+}
+
+.menu a[href="kanban-bord.php"]:hover {
+  background-color: #212328f9; 
+  color: black; 
+}
 
 .container {
   display: flex;
