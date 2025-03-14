@@ -26,9 +26,11 @@
     </header>
 
     <div class="container">
-        <img src="img/logo-big-v3.png" alt="">
-        <a href="kanban-bord.php">naar kanban-bord</a>
-    </div>
+        <img src="img/logo-big-v3.png" alt="LOGO">
+        <div class="menu">
+            <a href="kanban-bord.php">naar kanban-bord</a>
+            </menu>
+        </div>
 
 </body>
 
