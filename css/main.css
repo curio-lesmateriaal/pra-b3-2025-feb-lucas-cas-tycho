@@ -27,12 +27,16 @@ header {
 
 .navbar img {
   width: 200px;
-  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .menu {
   display: flex;
+  align-items: center;
   gap: 20px;
+  z-index: 1;
 }
 
 .menu a {
@@ -44,21 +48,20 @@ header {
   text-transform: uppercase;
 }
 
-
 .menu a:hover {
-  color: rgb(65, 62, 65);
-  text-decoration: underline;
+  border-bottom: white 1px solid;
 }
+
 .menu a[href="kanban-bord.php"] {
   border: 2px solid #3d3f43f9;
   padding: 8px 12px;
-  border-radius: 10px; 
-  display: inline-block; 
+  border-radius: 10px;
+  display: inline-block;
 }
 
 .menu a[href="kanban-bord.php"]:hover {
-  background-color: #212328f9; 
-  color: black; 
+  background-color: #212328f9;
+  color: black;
 }
 
 .container {
@@ -92,12 +95,14 @@ header {
 .input-group {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 label {
-  font-size: 16px;
+  font-size: 20px;
   color: white;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 input {
@@ -105,9 +110,10 @@ input {
   font-size: 16px;
   border: 1px solid #455268f9;
   border-radius: 5px;
-  width: 410px;
+  width: 300px;
   background-color: #151d2af9;
   color: white;
+  text-align: left;
 }
 
 form {
@@ -183,7 +189,7 @@ form.account-form {
 
 .kanban-column {
   flex: 1;
-  border: 2px solid black;
+  border: #3d3f43f9 3px solid;
   padding: 10px;
   max-height: 100%;
   display: flex;
@@ -245,21 +251,212 @@ form.account-form {
   background-color: rgb(67, 67, 67);
 }
 
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: #3d3f43f9 3px solid;
+  border-radius: 10px;
+  z-index: 1000;
+  background-color: #19212ef9;
+  width: 700px;
+  max-width: 80%;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: #313d52f9 solid 2px;
+}
+
+.modal-header h2 {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: white;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.modal-body {
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  text-align: center;
+}
+
+.modal-body label {
+  margin-top: 20px;
+  cursor: pointer;
+  display: inline-block;
+  min-width: 140px;
+  vertical-align: top;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
 button {
   padding: 5px 10px;
-  padding-top: 0;
+  padding-top: 3;
   border: #455268f9 solid 2px;
   background-color: #2b384df9;
   cursor: pointer;
   font-size: 16px;
   margin: 10px;
   color: white;
-  border-radius: 20%;
+  border-radius: 10px;
 }
 
 button:hover {
   background-color: #3d4e6bf9;
 }
+
+#add-task-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#add-task-form button {
+  padding: 8px 20px;
+  border: 2px solid #455268f9;
+  background-color: #2b384df9;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#add-task-form button:hover {
+  background-color: #3d4e6bf9;
+}
+
+.buttons.login-buttons {
+  width: 300px;
+}
+
+.buttons.account-buttons {
+  width: 440px;
+}
+
+.-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 140px;
+  color: white;
+}
+
+.task-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 150px;
+  color: white;
+}
+
+.task-button:first-child {
+  background-color: #007bff;
+}
+
+.task-button:last-child {
+  background-color: #28a745;
+}
+
+.task-button:hover {
+  opacity: 0.9;
+}
+
+textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #455268f9;
+  border-radius: 5px;
+  width: 300px;
+  background-color: #151d2af9;
+  color: white;
+  text-align: center;
+  text-align: left;
+}
+
+.afdeling-select {
+  padding: 5px;
+  font-size: 16px;
+  border: 2px solid #455268f9;
+  border-radius: 5px;
+  background-color: #151d2af9;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align: center;
+}
+
+.afdeling-select option {
+  background-color: #19212ef9;
+  color: white;
+}
+
+.afdeling-select:hover,
+.afdeling-select:focus {
+  background-color: #3d4e6bf9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*! HTML5 Boilerplate v8.0.0 | MIT License | https://html5boilerplate.com/ */
 
@@ -350,28 +547,28 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-html{
-    font-size: 16px;
+html {
+  font-size: 16px;
 }
 
-.container{
-    max-width: 1024px;
-    margin: 0 auto;
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
-.form-group{
-    margin: 1rem 0;
+.form-group {
+  margin: 1rem 0;
 }
 
-label{
-    cursor: pointer;
-    display: inline-block;
-    min-width: 140px;
-    vertical-align: top;
+label {
+  cursor: pointer;
+  display: inline-block;
+  min-width: 310px;
+  vertical-align: top;
 }
 
-.form-input{
-    width: 600px;
+.form-input {
+  width: 600px;
 }
 
 
@@ -460,9 +657,10 @@ label{
 }
 
 
-.title{
+.title {
   border-bottom: #313d52f9 solid 2px;
 }
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.
@@ -474,9 +672,9 @@ label{
 }
 
 @media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */
 }
 
@@ -487,6 +685,7 @@ label{
    ========================================================================== */
 
 @media print {
+
   *,
   *::before,
   *::after {

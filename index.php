@@ -15,8 +15,15 @@
     <header>
         <div class="navbar">
             <div class="menu">
-                <a href="inlog-page.php">klantenservice</a>
-            </div>
+            <select name="Afdeling" id="Afdeling" class="afdeling-select">
+                <option value="klantenservice">- personeell -</option>
+                <option value="afdeling1">- horeca -</option>
+                <option value="afdeling2">- techniek -</option>
+                <option value="afdeling3">- inkoop -</option>
+                <option value="afdeling4">- klantenservice -</option>
+                <option value="afdeling5">- groen -</option>
+            </select>
+        </div>
             <img src="img/logo-big-v4.png" alt="LOGO">
             <div class="menu">
                 <a href="index.php">HOME</a>

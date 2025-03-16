@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Aanmaken</title>
+    <title>Account inloggen</title>
     <?php require_once 'backend/config.php'; ?>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
     <header>
         <div class="navbar">
             <div class="menu">
-                <a href="inlog-page.php">KLANTENSERVICE</a>
-            </div>
+            <select name="Afdeling" id="Afdeling" class="afdeling-select">
+                <option value="klantenservice">- personeell -</option>
+                <option value="afdeling1">- horeca -</option>
+                <option value="afdeling2">- techniek -</option>
+                <option value="afdeling3">- inkoop -</option>
+                <option value="afdeling4">- klantenservice -</option>
+                <option value="afdeling5">- groen -</option>
+            </select>
+        </div>
             <img src="img/logo-big-v4.png" alt="Developer Island" class="logo">
             <div class="menu">
                 <a href="index.php">HOME</a>
@@ -41,4 +50,5 @@
         </form>
     </div>
 </body>
+
 </html>
