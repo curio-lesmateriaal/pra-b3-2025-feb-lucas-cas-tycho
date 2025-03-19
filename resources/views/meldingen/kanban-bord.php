@@ -95,7 +95,7 @@
                     </div>
 
                    
-                <form action="<?php echo $base_url; ?>meldingenController.php" method="POST">
+                <form action="<?php echo $base_url; ?>/app/http/controllers/meldingenController.php" method="POST">
                     <div class="modal-body">
                         <div class="input-group">
                             <label for="add-task-done">taak naam</label>
