@@ -41,8 +41,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="input-group">
-                            <label for="taskInfoTodo">taak naam</label>
-                            <input type="text" id="taskInfoTodo" name="taskInfoTodo" required>
+                            <label for="name">taak naam</label>
+                            <input type="text" id="name" name="name" required>
                         </div>
                         <div class="input-group">
                             <label for="taskInfoTodo">taak info</label>
