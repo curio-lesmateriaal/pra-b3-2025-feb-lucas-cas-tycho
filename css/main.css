@@ -228,12 +228,29 @@ form.account-form {
   color: white;
 }
 
-.delete-task {
-  cursor: pointer;
-  color: gray;
-  font-weight: bold;
+span{
+  display: flex !important;
+  
 }
 
+.delete-task {
+    color: rgb(63, 63, 63);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.kanban-column .tasks-container input  {
+  display: flex;
+  width: 12%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #455268f9;
+  border-radius: 5px;
+  background-color: #151d2af9;
+  color: white;
+  text-align: right;
+}
 .add-task {
   position: static;
   align-self: flex-end;

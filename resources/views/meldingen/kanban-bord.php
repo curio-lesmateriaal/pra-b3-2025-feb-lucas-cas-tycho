@@ -13,7 +13,7 @@
 <body>
 
     <header>
-    <?php require_once '../components/header.php'; ?>
+        <?php require_once '../components/header.php'; ?>
     </header>
 
     <div class="kanban-container">
@@ -25,7 +25,12 @@
                 <div class="tasks-container">
                     <div class="task">Taak 1 <span class="delete-task">✖</span></div>
                     <div class="task">Taak 2 <span class="delete-task">✖</span></div>
-                    <div class="task">Taak 3 <span class="delete-task">✖</span></div>
+                    <div class="task">Taak 3 <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingenController.php" method="post">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="id" value="<?php echo $melding['ID']; ?>">
+                            <input type="submit" class="delete-task" value="✖">
+                        </form>
+                    </div>
                 </div>
                 <button data-modal-target="#modal-todo" class="add-task">+</button>
                 <div class="modal" id="modal-todo">
@@ -34,11 +39,11 @@
                     </div>
                     <div class="modal-body">
                         <div class="input-group">
-                            <label for="add-task-todo">title</label>
+                            <label for="add-task-todo">taak naam</label>
                             <input type="text" id="add-task-todo" name="add-task-todo" required>
                         </div>
                         <div class="input-group">
-                            <label for="task-info-todo">beschrijving</label>
+                            <label for="task-info-todo">taak info</label>
                             <textarea id="task-info-todo" name="task-info-todo" style="width: 300px; height: 100px; resize: none;" required></textarea>
                         </div>
                         <div class="buttons task-buttons">
@@ -61,11 +66,11 @@
                     </div>
                     <div class="modal-body">
                         <div class="input-group">
-                            <label for="add-task-inprogress">title</label>
+                            <label for="add-task-inprogress">taak naam</label>
                             <input type="text" id="add-task-inprogress" name="add-task-inprogress" required>
                         </div>
                         <div class="input-group">
-                            <label for="task-info-inprogress">beschrijving</label>
+                            <label for="task-info-inprogress">taak info</label>
                             <textarea id="task-info-inprogress" name="task-info-inprogress" style="width: 300px; height: 100px; resize: none;" required></textarea>
                         </div>
                         <div class="buttons task-buttons">
@@ -88,11 +93,11 @@
                     </div>
                     <div class="modal-body">
                         <div class="input-group">
-                            <label for="add-task-done">titel</label>
+                            <label for="add-task-done">taak naam</label>
                             <input type="text" id="add-task-done" name="add-task-done" required>
                         </div>
                         <div class="input-group">
-                            <label for="task-info-done">beschrijving</label>
+                            <label for="task-info-done">taak info</label>
                             <textarea id="task-info-done" name="task-info-done" style="width: 300px; height: 100px; resize: none;" required></textarea>
                         </div>
                         <div class="buttons task-buttons">
