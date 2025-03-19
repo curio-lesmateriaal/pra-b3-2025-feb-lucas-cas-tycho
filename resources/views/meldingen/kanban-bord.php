@@ -22,7 +22,9 @@
                 <div class="title">
                     <h2>TO DO</h2>
                 </div>
-                <div class="tasks-container">
+                    <div class="tasks-container">
+                      
+
                     <div class="task">Taak 1 <span class="delete-task">✖</span></div>
                     <div class="task">Taak 2 <span class="delete-task">✖</span></div>
                     <div class="task">Taak 3 <span class="delete-task">✖</span></div>
@@ -86,6 +88,9 @@
                     <div class="modal-header">
                         <h2>taak maken</h2>
                     </div>
+
+                   
+                <form action="<?php echo $base_url; ?>meldingenController.php" method="POST">
                     <div class="modal-body">
                         <div class="input-group">
                             <label for="add-task-done">titel</label>
@@ -99,6 +104,8 @@
                             <button type="button" class="task-button" data-close-button>Cancel</button>
                             <button type="submit" class="task-button">Add Task</button>
                         </div>
+                   
+                </form> 
                     </div>
                 </div>
                 <div id="overlay"></div>
