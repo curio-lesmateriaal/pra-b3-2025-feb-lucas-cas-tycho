@@ -2,33 +2,17 @@
 <html lang="nl">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Aanmaken</title>
-    <?php require_once 'backend/config.php'; ?>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
+    <?php require_once '../../../backend/config.php'; ?>
+    <title>Account aanmaken</title>
+    <link rel="stylesheet" href="../../../css/normalize.css">
+    <link rel="stylesheet" href="../../../css/main.css">
 </head>
 
 <body>
     <header>
-        <div class="navbar">
-            <div class="menu">
-            <select name="Afdeling" id="Afdeling" class="afdeling-select">
-                <option value="klantenservice">- personeell -</option>
-                <option value="afdeling1">- horeca -</option>
-                <option value="afdeling2">- techniek -</option>
-                <option value="afdeling3">- inkoop -</option>
-                <option value="afdeling4">- klantenservice -</option>
-                <option value="afdeling5">- groen -</option>
-            </select>
-        </div>
-            <img src="img/logo-big-v4.png" alt="Developer Island" class="logo">
-            <div class="menu">
-                <a href="index.php">HOME</a>
-                <a href="inlog-page.php">INLOGGEN</a>
-            </div>
-        </div>
+    <?php require_once '../components/header.php'; ?>
     </header>
     <div class="container">
         <h2 class="account-title">ACCOUNT AANMAKEN</h2>

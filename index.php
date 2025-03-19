@@ -13,32 +13,16 @@
 <body>
 
     <header>
-        <div class="navbar">
-            <div class="menu">
-            <select name="Afdeling" id="Afdeling" class="afdeling-select">
-                <option value="klantenservice">- personeell -</option>
-                <option value="afdeling1">- horeca -</option>
-                <option value="afdeling2">- techniek -</option>
-                <option value="afdeling3">- inkoop -</option>
-                <option value="afdeling4">- klantenservice -</option>
-                <option value="afdeling5">- groen -</option>
-            </select>
-        </div>
-            <img src="img/logo-big-v4.png" alt="LOGO">
-            <div class="menu">
-                <a href="index.php">HOME</a>
-                <a href="inlog-page.php">INLOGGEN</a>
-            </div>
-        </div>
+    <?php require_once 'resources/views/components/header.php'; ?>
     </header>
 
     <div class="container">
         <img src="img/logo-big-v3.png" alt="LOGO">
         <div class="menu">
-            <a href="kanban-bord.php">naar kanban-bord</a>
+            <a href="resources/views/meldingen/kanban-bord.php">naar kanban-bord</a>
             </menu>
         </div>
-
+    </div>
 </body>
 
 </html>

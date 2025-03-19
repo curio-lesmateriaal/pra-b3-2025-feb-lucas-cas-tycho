@@ -52,14 +52,14 @@ header {
   border-bottom: white 1px solid;
 }
 
-.menu a[href="kanban-bord.php"] {
+.menu a[href="resources/views/meldingen/kanban-bord.php"] {
   border: 2px solid #3d3f43f9;
   padding: 8px 12px;
   border-radius: 10px;
   display: inline-block;
-}
+} 
 
-.menu a[href="kanban-bord.php"]:hover {
+.menu a[href="resources/views/meldingen/kanban-bord.php"]:hover {
   background-color: #212328f9;
   color: black;
 }

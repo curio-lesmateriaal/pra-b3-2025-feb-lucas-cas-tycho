@@ -14,7 +14,7 @@ overlay.addEventListener('click', () => {
   modals.forEach(modal => {
     closeModal(modal);
   });
-  
+
 });
 closeModalButton.forEach(button => {
   button.addEventListener('click', () => {
