@@ -1,116 +1,104 @@
 <?php
- 
-//Variabelen vullen
+
+
+require_once '../../../config/conn.php';
+
 $action = $_POST['action'];
- 
+
 if ($action == "create") {
- 
-    $attractie = $_POST['attractie'];
-    $capaciteit = $_POST['capaciteit'];
-    $melder = $_POST['melder'];
-    $type = $_POST['type'];
-    $overige_info = $_POST['overige_info'];
-    if (isset($_POST['prioriteit'])) {
-        $prioriteit = 1;
-    } else {
-        $prioriteit = 0;
+    $titel = $_POST["titel"];
+    if (empty($titel)) {
+        $errors[] = "Vul de taak-naam in. ";
     }
- 
- 
-    if (empty($attractie)) {
-        $errors[] = "Vul de naam van de attractie in.";
+
+    $beschrijving = $_POST["beschrijving"];
+    if (empty($beschrijving)) {
+        $errors[] = "Vul de beschrijving in. ";
     }
- 
-    if (empty($type)) {
-        $errors[] = "Vul een geldige type voor de attractie in.";
+    $afdeling = $_POST["afdeling"];
+    if (empty($afdeling)) {
+        $errors[] = "Vul de afdeling in. ";
     }
- 
-    if (!is_numeric($capaciteit)) {
-        $errors[] = "Vul voor capaciteit een geldig getal in.";
-    }
- 
-    if (empty($melder)) {
-        $errors[] = "Vul de naam van de melder in.";
-    }
- 
+
+
+    // $deadline = $_POST["deadline"];
+    // if (empty($deadline)) {
+    //     $errors[] = "Vul de deadline in. ";
+    // }
+
+    $status = "Todo";
+    // $user = $_POST['user_id'];
+    
     if (isset($errors)) {
         var_dump($errors);
+        die();
+    }
+
+
+
+    $query = "INSERT INTO taken (titel, beschrijving, status, afdeling)
+    VALUES (:titel, :beschrijving, :status, :afdeling);";
+
+    $statement = $conn->prepare($query);
+
+    $statement->execute([
+        ":titel"=> $titel,
+        ":beschrijving"=> $beschrijving,
+        ":status"=> $status,	
+        ":afdeling"=> $afdeling,
+    ]);
+
+    header("Location: ../../../index.php?msg=Taak aangemaakt!");
+    exit();
+}
+
+
+    // if ($action == "edit") {
+    //     $id = $_POST['id'] ?? null;
+    //     $titel = $_POST['name'] ?? null;
+    //     $beschrijving = $_POST['taskInfoTodo'] ?? null;
+
+    //     if (!$id) {
+    //         die("Fout: geen ID opgegeven voor bewerking.");
+    //     }
+
+    //     // 2. Query
+    //     $query = "UPDATE meldingen SET titel = :titel, beschrijving = :beschrijving WHERE id = :id";
+
+    //     // 3. Prepare
+    //     $statement = $conn->prepare($query);
+
+    //     // 4. Execute
+    //     $statement->execute([
+    //         ":titel" => $titel,
+    //         ":beschrijving" => $beschrijving,
+    //         ":id" => $id
+    //     ]);
+
+    //     header("Location: ../../../resources/views/meldingen/kanban-bord.php?msg=Melding is aangepast");
+    //     exit();
+    // }
+
+    if ($action == "delete") {
+        $id = $_POST['id'] ?? null;
+
+        if (!$id) {
+            die("Fout: geen ID opgegeven voor verwijderen.");
+        }
+
+        // 2. Query
+        $query = "DELETE FROM taken WHERE id = :id";
+
+        // 3. Prepare
+        $statement = $conn->prepare($query);
+
+        // 4. Execute
+        $statement->execute([
+            ":id" => $id
+        ]);
+
+        header("Location: ../../../resources/views/meldingen/kanban-bord.php?msg=Melding is verwijderd");
         exit();
     }
- 
-    //1. Verbinding
-    require_once '../../../backend/conn.php';
- 
-    //2. Query
-    $query = "INSERT INTO meldingen (attractie, capaciteit, melder, prioriteit, type, overige_info) VALUES(:attractie, :capaciteit, :melder, :prioriteit, :type, :overige_info)";
- 
-    //3. Prepare
-    $statement = $conn->prepare($query);
- 
-    //4. Execute
-    $statement->execute([
-        ":attractie" => $attractie,
-        ":capaciteit" => $capaciteit,
-        ":melder" => $melder,
-        ":prioriteit" => $prioriteit,
-        ":type" => $type,
-        ":overige_info" => $taskInfoTodo,
-    ]);
- 
-    header("Location: ../../../resources/views/meldingen/index.php?msg=Melding opgeslagen");
-}
- 
-if ($action == "edit") {
-    $attractie = $_POST['attractie'];
-    $capaciteit = $_POST['capaciteit'];
-    $melder = $_POST['melder'];
-    $overig = $_POST['overig'];
-    $id = $_POST['id'];
-    if (isset($_POST['prioriteit'])) {
-        $prioriteit = 1;
-    } else {
-        $prioriteit = 0;
-    }
- 
-    //1. Verbinding
-    require_once '../../../backend/conn.php';
- 
-    //2. Query
-    $query = "UPDATE meldingen SET attractie = :attractie, capaciteit = :capaciteit,
-        melder = :melder, prioriteit = :prioriteit, overige_info = :overig
-        WHERE id = :id
-";
- 
-    //3. Prepare
-    $statement = $conn->prepare($query);
- 
-    //4. Execute
-    $statement->execute([
-        ":attractie" => $attractie,
-        ":capaciteit" => $capaciteit,
-        ":naam" => $naam,
-        ":afdeling" => $afdeling,
-        ":beschrijving" => $beschrijving,
-        ":id" => $id
-    ]);
- 
-    header("Location: ../../../resources/views/meldingen/index.php?msg=Melding is aangepast");
-}
-if ($action == "delete") {
-    $id = $_POST['id'];
-    //1. Verbinding
-    require_once '../../../config/conn.php';
- 
-    //2. Query
-    $query = "DELETE FROM meldingen WHERE id = :id";
- 
-    //3. Prepare
-    $statement = $conn->prepare($query);
- 
-    //4. Execute
-    $statement->execute([
-        ":id" => $id
-    ]);
- 
-    header("Location: ../../../resources/views/meldingen/index.php?msg=Melding is Verwijderd");
-}
+
+?>
