@@ -36,7 +36,7 @@ if ($action == "create") {
     require_once '../../../config/conn.php';
 
     // 2. Query
-    $query = "INSERT INTO taken (titel, beschrijving, afdeling, status) VALUES(:titel, :beschrijving, :afdeling, :status)";
+    $query = "INSERT INTO taken (titel, beschrijving, afdeling, status, is_deleted) VALUES(:titel, :beschrijving, :afdeling, :status, 0)";
 
     // 3. Prepare
     $statement = $conn->prepare($query);
@@ -114,8 +114,8 @@ if ($action == "delete") {
     // 1. Verbinding
     require_once '../../../config/conn.php';
 
-    // 2. Query: Hard delete (volledig verwijderen)
-    $query = "DELETE FROM taken WHERE id = :id";
+    // 2. Query: Soft delete (markeer als verwijderd)
+    $query = "UPDATE taken SET is_deleted = 1 WHERE id = :id";
 
     // 3. Prepare
     $statement = $conn->prepare($query);

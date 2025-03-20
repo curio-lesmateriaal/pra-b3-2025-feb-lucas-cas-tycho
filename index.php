@@ -11,16 +11,14 @@
 </head>
 
 <body>
-
     <header>
-    <?php require_once 'resources/views/components/header.php'; ?>
+        <?php require_once 'resources/views/components/header.php'; ?>
     </header>
 
     <div class="container">
         <img src="img/logo-big-v3.png" alt="LOGO">
         <div class="menu">
             <a href="resources/views/meldingen/kanban-bord.php">naar kanban-bord</a>
-            </menu>
         </div>
     </div>
 </body>
