@@ -96,6 +96,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </div>
                 </form>
+
             </div>
 
             <!-- IN PROGRESS Column -->
