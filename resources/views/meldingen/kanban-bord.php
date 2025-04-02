@@ -47,7 +47,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     <!-- Edit Button -->
                                     <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>" class="edit-button">✎</button>
                                     <!-- Delete Button -->
-                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingcontroller.php" method="POST"
+                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST"
                                         onsubmit="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
@@ -61,7 +61,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <button data-modal-target="#modal-todo" class="add-task">+</button>
 
                 <!-- Add Task Modal -->
-                <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingcontroller.php" method="POST">
+                <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST">
                     <input type="hidden" name="action" value="create">
                     <input type="hidden" name="status" value="Todo"> <!-- Default status for new tasks -->
                     <div class="modal" id="modal-todo">
@@ -116,7 +116,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     <!-- Edit Button -->
                                     <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>" class="edit-button">✎</button>
                                     <!-- Delete Button -->
-                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingcontroller.php" method="POST"
+                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST"
                                         onsubmit="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
@@ -146,7 +146,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     <!-- Edit Button -->
                                     <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>" class="edit-button">✎</button>
                                     <!-- Delete Button -->
-                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingcontroller.php" method="POST"
+                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST"
                                         onsubmit="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
@@ -161,7 +161,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             <!-- Edit Task Modal for all tasks -->
             <?php foreach ($tasks as $task): ?>
-                <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingcontroller.php" method="POST">
+                <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST">
                     <input type="hidden" name="action" value="update">
                     <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
                     <div class="modal" id="modal-edit-<?php echo $task['id']; ?>">
