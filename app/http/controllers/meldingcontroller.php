@@ -9,10 +9,10 @@ error_reporting(E_ALL);
 $action = $_POST['action'];
 
 if ($action == "create") {
-    $titel = $_POST['titel'] ;
-    $beschrijving = $_POST['beschrijving'] ;
+    $titel = $_POST['titel'];
+    $beschrijving = $_POST['beschrijving'];
     $afdeling = $_POST['afdeling'];
-    $status = 'Todo'; 
+    $status = 'Todo'; // Default status voor nieuwe taken
 
     // Basisvalidatie
     if (empty($titel)) {
@@ -58,6 +58,7 @@ if ($action == "update") {
     $titel = $_POST['titel'];
     $beschrijving = $_POST['beschrijving'];
     $afdeling = $_POST['afdeling'];
+    $status = $_POST['status']; // Nieuwe status ophalen uit het formulier
 
     // Basisvalidatie
     if (empty($id)) {
@@ -77,6 +78,10 @@ if ($action == "update") {
         $errors[] = "Selecteer een afdeling.";
     }
 
+    if (empty($status)) {
+        $errors[] = "Selecteer een status.";
+    }
+
     if (isset($errors)) {
         var_dump($errors);
         exit();
@@ -85,8 +90,8 @@ if ($action == "update") {
     // 1. Verbinding
     require_once '../../../config/conn.php';
 
-    // 2. Query
-    $query = "UPDATE taken SET titel = :titel, beschrijving = :beschrijving, afdeling = :afdeling WHERE id = :id";
+    // 2. Query - Status toegevoegd aan de UPDATE
+    $query = "UPDATE taken SET titel = :titel, beschrijving = :beschrijving, afdeling = :afdeling, status = :status WHERE id = :id";
 
     // 3. Prepare
     $statement = $conn->prepare($query);
@@ -96,6 +101,7 @@ if ($action == "update") {
         ":titel" => $titel,
         ":beschrijving" => $beschrijving,
         ":afdeling" => $afdeling,
+        ":status" => $status,
         ":id" => $id
     ]);
 
