@@ -30,6 +30,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="kanban-container">
         <div class="kanban-board">
+            <!-- TO DO Column -->
             <div class="kanban-column">
                 <div class="title">
                     <h2>TO DO</h2>
@@ -62,6 +63,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <!-- Add Task Modal -->
                 <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingcontroller.php" method="POST">
                     <input type="hidden" name="action" value="create">
+                    <input type="hidden" name="status" value="Todo"> <!-- Default status for new tasks -->
                     <div class="modal" id="modal-todo">
                         <div class="modal-header">
                             <h2>taak maken</h2>
@@ -75,9 +77,9 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 <label for="beschrijving">taak info</label>
                                 <textarea id="beschrijving" name="beschrijving" style="width: 300px; height: 100px; resize: none;" required></textarea>
                             </div>
-                            <label for="input-group">Afdeling:</label>
+                            <label for="afdeling">Afdeling:</label>
                             <div class="afdeling-select">
-                                <select name="afdeling" id="afdeling" class="form-input" type="text" required>
+                                <select name="afdeling" id="afdeling" class="form-input" required>
                                     <option value=""></option>
                                     <option value="Personeel">Personeel</option>
                                     <option value="Horeca">Horeca</option>
@@ -94,63 +96,115 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </div>
                 </form>
-
-                <!-- Edit Task Modal for each task -->
-                <?php foreach ($tasks as $task): ?>
-                    <?php if ($task['status'] === 'Todo'): ?>
-                        <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingcontroller.php" method="POST">
-                            <input type="hidden" name="action" value="update">
-                            <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
-                            <div class="modal" id="modal-edit-<?php echo $task['id']; ?>">
-                                <div class="modal-header">
-                                    <h2>taak bewerken</h2>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="input-group">
-                                        <label for="titel-<?php echo $task['id']; ?>">taak naam</label>
-                                        <input type="text" id="titel-<?php echo $task['id']; ?>" name="titel" value="<?php echo $task['titel']; ?>" required>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="beschrijving-<?php echo $task['id']; ?>">taak info</label>
-                                        <textarea id="beschrijving-<?php echo $task['id']; ?>" name="beschrijving" style="width: 300px; height: 100px; resize: none;" required><?php echo $task['beschrijving']; ?></textarea>
-                                    </div>
-                                    <label for="afdeling-<?php echo $task['id']; ?>">Afdeling:</label>
-                                    <div class="afdeling-select">
-                                        <select name="afdeling" id="afdeling-<?php echo $task['id']; ?>" class="form-input">
-                                            <option value="" <?php echo $task['afdeling'] == '' ? 'selected' : ''; ?>></option>
-                                            <option value="Personeel" <?php echo $task['afdeling'] == 'Personeel' ? 'selected' : ''; ?>>Personeel</option>
-                                            <option value="Horeca" <?php echo $task['afdeling'] == 'Horeca' ? 'selected' : ''; ?>>Horeca</option>
-                                            <option value="Techniek" <?php echo $task['afdeling'] == 'Techniek' ? 'selected' : ''; ?>>Techniek</option>
-                                            <option value="Inkoop" <?php echo $task['afdeling'] == 'Inkoop' ? 'selected' : ''; ?>>Inkoop</option>
-                                            <option value="Klantenservice" <?php echo $task['afdeling'] == 'Klantenservice' ? 'selected' : ''; ?>>Klantenservice</option>
-                                            <option value="Groen" <?php echo $task['afdeling'] == 'Groen' ? 'selected' : ''; ?>>Groen</option>
-                                        </select>
-                                    </div>
-                                   
-                                    <div class="buttons task-buttons">
-                                        <button type="button" class="task-button" data-close-button>Cancel</button>
-                                        <button type="submit" class="task-button">Save Changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    <?php endif; ?>
-                <?php endforeach; ?>
             </div>
+
+            <!-- IN PROGRESS Column -->
             <div class="kanban-column">
                 <div class="title">
                     <h2>IN PROGRESS</h2>
                 </div>
                 <div class="tasks-container">
+                    <?php foreach ($tasks as $task): ?>
+                        <?php if ($task['status'] === 'In Progress'): ?>
+                            <div class="task">
+                                <div class="task-top">
+                                    <h3><?php echo $task['titel']; ?></h3>
+                                    <p class="afdeling">Afdeling: <?php echo $task['afdeling']; ?></p>
+                                </div>
+                                <div class="task-actions">
+                                    <!-- Edit Button -->
+                                    <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>" class="edit-button">✎</button>
+                                    <!-- Delete Button -->
+                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingcontroller.php" method="POST"
+                                        onsubmit="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');">
+                                        <input type="hidden" name="action" value="delete">
+                                        <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+                                        <input type="submit" value="✖" class="delete-button">
+                                    </form>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
+
+            <!-- DONE Column -->
             <div class="kanban-column">
                 <div class="title">
                     <h2>DONE</h2>
                 </div>
                 <div class="tasks-container">
+                    <?php foreach ($tasks as $task): ?>
+                        <?php if ($task['status'] === 'Done'): ?>
+                            <div class="task">
+                                <div class="task-top">
+                                    <h3><?php echo $task['titel']; ?></h3>
+                                    <p class="afdeling">Afdeling: <?php echo $task['afdeling']; ?></p>
+                                </div>
+                                <div class="task-actions">
+                                    <!-- Edit Button -->
+                                    <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>" class="edit-button">✎</button>
+                                    <!-- Delete Button -->
+                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingcontroller.php" method="POST"
+                                        onsubmit="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');">
+                                        <input type="hidden" name="action" value="delete">
+                                        <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+                                        <input type="submit" value="✖" class="delete-button">
+                                    </form>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
+
+            <!-- Edit Task Modal for all tasks -->
+            <?php foreach ($tasks as $task): ?>
+                <form action="<?php echo $base_url; ?>/app/Http/Controllers/meldingcontroller.php" method="POST">
+                    <input type="hidden" name="action" value="update">
+                    <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+                    <div class="modal" id="modal-edit-<?php echo $task['id']; ?>">
+                        <div class="modal-header">
+                            <h2>taak bewerken</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <label for="titel-<?php echo $task['id']; ?>">taak naam</label>
+                                <input type="text" id="titel-<?php echo $task['id']; ?>" name="titel" value="<?php echo $task['titel']; ?>" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="beschrijving-<?php echo $task['id']; ?>">taak info</label>
+                                <textarea id="beschrijving-<?php echo $task['id']; ?>" name="beschrijving" style="width: 300px; height: 100px; resize: none;" required><?php echo $task['beschrijving']; ?></textarea>
+                            </div>
+                            <label for="afdeling-<?php echo $task['id']; ?>">Afdeling:</label>
+                            <div class="afdeling-select">
+                                <select name="afdeling" id="afdeling-<?php echo $task['id']; ?>" class="form-input">
+                                    <option value="" <?php echo $task['afdeling'] == '' ? 'selected' : ''; ?>></option>
+                                    <option value="Personeel" <?php echo $task['afdeling'] == 'Personeel' ? 'selected' : ''; ?>>Personeel</option>
+                                    <option value="Horeca" <?php echo $task['afdeling'] == 'Horeca' ? 'selected' : ''; ?>>Horeca</option>
+                                    <option value="Techniek" <?php echo $task['afdeling'] == 'Techniek' ? 'selected' : ''; ?>>Techniek</option>
+                                    <option value="Inkoop" <?php echo $task['afdeling'] == 'Inkoop' ? 'selected' : ''; ?>>Inkoop</option>
+                                    <option value="Klantenservice" <?php echo $task['afdeling'] == 'Klantenservice' ? 'selected' : ''; ?>>Klantenservice</option>
+                                    <option value="Groen" <?php echo $task['afdeling'] == 'Groen' ? 'selected' : ''; ?>>Groen</option>
+                                </select>
+                            </div>
+                            <label for="status-<?php echo $task['id']; ?>">Status:</label>
+                            <div class="afdeling-select">
+                                <select name="status" id="status-<?php echo $task['id']; ?>" class="form-input" required>
+                                    <option value="Todo" <?php echo $task['status'] == 'Todo' ? 'selected' : ''; ?>>Todo</option>
+                                    <option value="In Progress" <?php echo $task['status'] == 'In Progress' ? 'selected' : ''; ?>>In Progress</option>
+                                    <option value="Done" <?php echo $task['status'] == 'Done' ? 'selected' : ''; ?>>Done</option>
+                                </select>
+                            </div>
+                            <div class="buttons task-buttons">
+                                <button type="button" class="task-button" data-close-button>Cancel</button>
+                                <button type="submit" class="task-button">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            <?php endforeach; ?>
+
             <div id="overlay"></div>
         </div>
     </div>
