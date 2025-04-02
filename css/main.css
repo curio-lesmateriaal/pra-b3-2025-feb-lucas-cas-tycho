@@ -183,7 +183,7 @@ form.account-form {
 .kanban-board {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  
   width: 100%;
   max-width: 1200px;
   height: 100%;
