@@ -126,6 +126,14 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                             <option value="Groen" <?php echo $task['afdeling'] == 'Groen' ? 'selected' : ''; ?>>Groen</option>
                                         </select>
                                     </div>
+                                    <div class="input-group">
+                                        <label for="status-<?php echo $task['id']; ?>">Status:</label>
+                                        <select name="status" id="status-<?php echo $task['id']; ?>" class="form-input">
+                                            <option value="Todo" <?php echo $task['status'] == 'Todo' ? 'selected' : ''; ?>>To Do</option>
+                                            <option value="In Progress" <?php echo $task['status'] == 'In Progress' ? 'selected' : ''; ?>>In Progress</option>
+                                            <option value="Done" <?php echo $task['status'] == 'Done' ? 'selected' : ''; ?>>Done</option>
+                                        </select>
+                                    </div>
                                    
                                     <div class="buttons task-buttons">
                                         <button type="button" class="task-button" data-close-button>Cancel</button>
