@@ -17,7 +17,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../../../config/conn.php';
-$query = "SELECT * FROM taken WHERE is_deleted = 0"; // Alleen niet-verwijderde taken ophalen
+$query = "SELECT * FROM taken"; // Removed WHERE is_deleted = 0
 $statement = $conn->prepare($query);
 $statement->execute();
 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -77,7 +77,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                             <label for="input-group">Afdeling:</label>
                             <div class="afdeling-select">
-                                <select name="afdeling" id="afdeling" class="form-input" type="text" required>    
+                                <select name="afdeling" id="afdeling" class="form-input" type="text" required>
                                     <option value=""></option>
                                     <option value="Personeel">Personeel</option>
                                     <option value="Horeca">Horeca</option>
@@ -126,6 +126,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                             <option value="Groen" <?php echo $task['afdeling'] == 'Groen' ? 'selected' : ''; ?>>Groen</option>
                                         </select>
                                     </div>
+                                    <div class =
                                     <div class="buttons task-buttons">
                                         <button type="button" class="task-button" data-close-button>Cancel</button>
                                         <button type="submit" class="task-button">Save Changes</button>

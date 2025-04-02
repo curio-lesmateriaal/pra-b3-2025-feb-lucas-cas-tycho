@@ -227,7 +227,9 @@ form.account-form {
 .task {
   background-color: #19212ef9;
   border: #455268f9 solid 2px;
-  padding: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+  
   margin: 10px 0;
   display: flex;
   justify-content: space-between;
@@ -271,6 +273,10 @@ form.account-form {
   padding: 0 10px;
 }
 
+.task .delete-button:hover {
+  color: #ff0000; /* Rood bij hover */
+}
+
 span {
   display: flex !important;
 }
@@ -283,7 +289,7 @@ span {
 
 .kanban-column .tasks-container input {
   display: flex;
-  width: 100%;
+  width: 44px;
   padding: 10px;
   font-size: 16px;
   border: none;
@@ -506,8 +512,20 @@ textarea {
   background-color: #3d4e6bf9;
 }
 
+.edit-button,
+.delete-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 10px;
+}
 
-
+.edit-button:hover,
+.delete-button:hover {
+    color: #ff0000; /* Rood bij hover */
+}
 
 
 

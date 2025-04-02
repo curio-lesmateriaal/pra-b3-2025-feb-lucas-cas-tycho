@@ -6,13 +6,13 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Variabelen vullen
-$action = $_POST['action'] ?? '';
+$action = $_POST['action'];
 
 if ($action == "create") {
-    $titel = $_POST['titel'] ?? '';
-    $beschrijving = $_POST['beschrijving'] ?? '';
-    $afdeling = $_POST['afdeling'] ?? '';
-    $status = 'Todo'; // Default status voor nieuwe taken
+    $titel = $_POST['titel'] ;
+    $beschrijving = $_POST['beschrijving'] ;
+    $afdeling = $_POST['afdeling'];
+    $status = 'Todo'; 
 
     // Basisvalidatie
     if (empty($titel)) {
@@ -54,10 +54,10 @@ if ($action == "create") {
 }
 
 if ($action == "update") {
-    $id = $_POST['id'] ?? '';
-    $titel = $_POST['titel'] ?? '';
-    $beschrijving = $_POST['beschrijving'] ?? '';
-    $afdeling = $_POST['afdeling'] ?? '';
+    $id = $_POST['id'];
+    $titel = $_POST['titel'];
+    $beschrijving = $_POST['beschrijving'];
+    $afdeling = $_POST['afdeling'];
 
     // Basisvalidatie
     if (empty($id)) {
@@ -104,7 +104,7 @@ if ($action == "update") {
 }
 
 if ($action == "delete") {
-    $id = $_POST['id'] ?? '';
+    $id = $_POST['id'];
 
     if (empty($id)) {
         header("Location: ../../../resources/views/meldingen/kanban-bord.php?msg=Geen ID opgegeven");

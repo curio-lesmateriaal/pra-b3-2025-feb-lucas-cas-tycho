@@ -77,7 +77,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                             <label for="input-group">Afdeling:</label>
                             <div class="afdeling-select">
-                                <select name="afdeling" id="afdeling" class="form-input" type="text" required>    
+                                <select name="afdeling" id="afdeling" class="form-input" type="text" required>
                                     <option value=""></option>
                                     <option value="Personeel">Personeel</option>
                                     <option value="Horeca">Horeca</option>
@@ -126,6 +126,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                             <option value="Groen" <?php echo $task['afdeling'] == 'Groen' ? 'selected' : ''; ?>>Groen</option>
                                         </select>
                                     </div>
+                                    <div class ="
                                     <div class="buttons task-buttons">
                                         <button type="button" class="task-button" data-close-button>Cancel</button>
                                         <button type="submit" class="task-button">Save Changes</button>
