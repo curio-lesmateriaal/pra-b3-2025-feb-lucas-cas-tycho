@@ -63,7 +63,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <!-- Add Task Modal -->
                 <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST">
                     <input type="hidden" name="action" value="create">
-                    <input type="hidden" name="status" value="Todo"> <!-- Default status for new tasks -->
+                    <input type="hidden" name="status" value="Todo">
                     <div class="modal" id="modal-todo">
                         <div class="modal-header">
                             <h2>taak maken</h2>
@@ -80,7 +80,6 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                             <label for="afdeling">Afdeling:</label>
                             <div class="afdeling-select">
                                 <select name="afdeling" id="afdeling" class="form-input" required>
-                                    <option value=""></option>
                                     <option value="Personeel">Personeel</option>
                                     <option value="Horeca">Horeca</option>
                                     <option value="Techniek">Techniek</option>
@@ -89,6 +88,15 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     <option value="Groen">Groen</option>
                                 </select>
                             </div>
+                            
+                            <label for="deadline">Start date:</label>
+                            <input
+                                type="date"
+                                id="deadline"
+                                name="deadline"
+                                min="2025-01-01"
+                                max="3000-12-31" />
+                          
                             <div class="buttons task-buttons">
                                 <button type="button" class="task-button" data-close-button>Cancel</button>
                                 <button type="submit" value="Verstuur melding" class="task-button">Add Task</button>
@@ -96,7 +104,6 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </div>
                 </form>
-
             </div>
 
             <!-- IN PROGRESS Column -->
@@ -116,7 +123,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     <!-- Edit Button -->
                                     <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>" class="edit-button">✎</button>
                                     <!-- Delete Button -->
-                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST"
+                                    <form action="<?php echo $base_url; ?>/app/  Http/Controllers/tasksController.php" method="POST"
                                         onsubmit="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
@@ -141,6 +148,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="task-top">
                                     <h3><?php echo $task['titel']; ?></h3>
                                     <p class="afdeling">Afdeling: <?php echo $task['afdeling']; ?></p>
+                                    <p class="afdeling">Deadline: <?php echo $task['deadline']; ?></p>
                                 </div>
                                 <div class="task-actions">
                                     <!-- Edit Button -->
@@ -180,7 +188,6 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                             <label for="afdeling-<?php echo $task['id']; ?>">Afdeling:</label>
                             <div class="afdeling-select">
                                 <select name="afdeling" id="afdeling-<?php echo $task['id']; ?>" class="form-input">
-                                    <option value="" <?php echo $task['afdeling'] == '' ? 'selected' : ''; ?>></option>
                                     <option value="Personeel" <?php echo $task['afdeling'] == 'Personeel' ? 'selected' : ''; ?>>Personeel</option>
                                     <option value="Horeca" <?php echo $task['afdeling'] == 'Horeca' ? 'selected' : ''; ?>>Horeca</option>
                                     <option value="Techniek" <?php echo $task['afdeling'] == 'Techniek' ? 'selected' : ''; ?>>Techniek</option>
@@ -197,6 +204,14 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     <option value="Done" <?php echo $task['status'] == 'Done' ? 'selected' : ''; ?>>Done</option>
                                 </select>
                             </div>
+                            <label for="deadline-<?php echo $task['id']; ?>">Start date:</label>
+                            <input
+                                type="date"
+                                id="deadline-<?php echo $task['id']; ?>"
+                                name="deadline"
+                                value="<?php echo $task['deadline']; ?>"
+                                min="2025-01-01"
+                                max="3000-12-31" />
                             <div class="buttons task-buttons">
                                 <button type="button" class="task-button" data-close-button>Cancel</button>
                                 <button type="submit" class="task-button">Save Changes</button>

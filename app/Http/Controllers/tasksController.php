@@ -12,8 +12,9 @@ if ($action == "create") {
     $titel = $_POST['titel'];
     $beschrijving = $_POST['beschrijving'];
     $afdeling = $_POST['afdeling'];
-    $status = 'Todo'; // Default status voor nieuwe taken
-
+    $status = 'Todo';
+    $deadline = $_POST['deadline'];
+    
     // Basisvalidatie
     if (empty($titel)) {
         $errors[] = "Vul de taak naam in.";
@@ -27,6 +28,10 @@ if ($action == "create") {
         $errors[] = "Selecteer een afdeling.";
     }
 
+    if (empty($deadline)) {
+        $errors[] = "Selecteer een deadline.";
+    }
+
     if (isset($errors)) {
         var_dump($errors);
         exit();
@@ -36,7 +41,7 @@ if ($action == "create") {
     require_once '../../../config/conn.php';
 
     // 2. Query
-    $query = "INSERT INTO taken (titel, beschrijving, afdeling, status) VALUES(:titel, :beschrijving, :afdeling, :status)";
+    $query = "INSERT INTO taken (titel, beschrijving, afdeling, status, deadline) VALUES(:titel, :beschrijving, :afdeling, :status, :deadline)";
 
     // 3. Prepare
     $statement = $conn->prepare($query);
@@ -46,7 +51,8 @@ if ($action == "create") {
         ":titel" => $titel,
         ":beschrijving" => $beschrijving,
         ":afdeling" => $afdeling,
-        ":status" => $status
+        ":status" => $status,
+        ":deadline" => $deadline,
     ]);
 
     header("Location: ../../../resources/views/meldingen/kanban-bord.php?msg=Taak is aangemaakt");
@@ -58,7 +64,8 @@ if ($action == "update") {
     $titel = $_POST['titel'];
     $beschrijving = $_POST['beschrijving'];
     $afdeling = $_POST['afdeling'];
-    $status = $_POST['status']; // Nieuwe status ophalen uit het formulier
+    $status = $_POST['status'];
+    $deadline = $_POST['deadline'];
 
     // Basisvalidatie
     if (empty($id)) {
@@ -81,6 +88,10 @@ if ($action == "update") {
     if (empty($status)) {
         $errors[] = "Selecteer een status.";
     }
+    
+    if (empty($deadline)) {
+        $errors[] = "Selecteer een deadline.";
+    }
 
     if (isset($errors)) {
         var_dump($errors);
@@ -90,8 +101,8 @@ if ($action == "update") {
     // 1. Verbinding
     require_once '../../../config/conn.php';
 
-    // 2. Query - Status toegevoegd aan de UPDATE
-    $query = "UPDATE taken SET titel = :titel, beschrijving = :beschrijving, afdeling = :afdeling, status = :status WHERE id = :id";
+    // 2. Query - Deadline verplaatst naar SET, WHERE alleen op ID
+    $query = "UPDATE taken SET titel = :titel, beschrijving = :beschrijving, afdeling = :afdeling, status = :status, deadline = :deadline WHERE id = :id";
 
     // 3. Prepare
     $statement = $conn->prepare($query);
@@ -102,7 +113,8 @@ if ($action == "update") {
         ":beschrijving" => $beschrijving,
         ":afdeling" => $afdeling,
         ":status" => $status,
-        ":id" => $id
+        ":deadline" => $deadline,
+        ":id" => $id,
     ]);
 
     header("Location: ../../../resources/views/meldingen/kanban-bord.php?msg=Taak is aangepast");
