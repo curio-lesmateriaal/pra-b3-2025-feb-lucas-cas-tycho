@@ -60,10 +60,10 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <button data-modal-target="#modal-todo" class="add-task">+</button>
 
-                <!-- Add Task Modal -->
+                <!-- taak maken -->
                 <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST">
                     <input type="hidden" name="action" value="create">
-                    <input type="hidden" name="status" value="Todo"> <!-- Default status for new tasks -->
+                    <input type="hidden" name="status" value="Todo"> 
                     <div class="modal" id="modal-todo">
                         <div class="modal-header">
                             <h2>taak maken</h2>
@@ -180,7 +180,6 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                             <label for="afdeling-<?php echo $task['id']; ?>">Afdeling:</label>
                             <div class="afdeling-select">
                                 <select name="afdeling" id="afdeling-<?php echo $task['id']; ?>" class="form-input">
-                                    <option value="" <?php echo $task['afdeling'] == '' ? 'selected' : ''; ?>></option>
                                     <option value="Personeel" <?php echo $task['afdeling'] == 'Personeel' ? 'selected' : ''; ?>>Personeel</option>
                                     <option value="Horeca" <?php echo $task['afdeling'] == 'Horeca' ? 'selected' : ''; ?>>Horeca</option>
                                     <option value="Techniek" <?php echo $task['afdeling'] == 'Techniek' ? 'selected' : ''; ?>>Techniek</option>
