@@ -60,9 +60,10 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 </div>
                 <button data-modal-target="#modal-todo" class="add-task">+</button>
 
-                <!-- Add Task Modal -->
+                <!-- taak maken -->
                 <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST">
                     <input type="hidden" name="action" value="create">
+
                     <input type="hidden" name="status" value="Todo">
                     <div class="modal" id="modal-todo">
                         <div class="modal-header">
