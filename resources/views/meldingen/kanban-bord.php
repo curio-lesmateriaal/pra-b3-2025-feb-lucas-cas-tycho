@@ -42,6 +42,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="task-top">
                                     <h3><?php echo $task['titel']; ?></h3>
                                     <p class="afdeling">Afdeling: <?php echo $task['afdeling']; ?></p>
+                                    <p class="afdeling">Deadline: <?php echo $task['deadline']; ?></p>
                                 </div>
                                 <div class="task-actions">
                                     <!-- Edit Button -->
@@ -119,6 +120,7 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="task-top">
                                     <h3><?php echo $task['titel']; ?></h3>
                                     <p class="afdeling">Afdeling: <?php echo $task['afdeling']; ?></p>
+                                    <p class="afdeling">Deadline: <?php echo $task['deadline']; ?></p>
                                 </div>
                                 <div class="task-actions">
                                     <!-- Edit Button -->
