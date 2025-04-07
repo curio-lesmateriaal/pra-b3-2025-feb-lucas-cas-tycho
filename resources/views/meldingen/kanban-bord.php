@@ -1,3 +1,11 @@
+<?php session_start();
+if(!isset($_SESSION['user_id']))
+{
+    // $msg = "je moet eerst inloggen!";
+    header("Location: ../login/inlog-page.php?msg=je moet eerst inloggen!");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="nl">
 

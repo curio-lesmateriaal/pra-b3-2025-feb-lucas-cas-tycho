@@ -1,5 +1,6 @@
-
 <?php
+
+session_start();
 $username = $_POST['username'];
 $password = $_POST['password'];
 
@@ -20,15 +21,15 @@ $statement->execute( [':username' => $username] );
 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
 if($statement -> rowCount() < 1){
-    die ('Gebruiker bestaat niet');
+    die ('account gegevens zijn niet juist');
 }
 
 if(!password_verify($password,$user['password']))
 {
-    die ('Wachtwoord is niet correct');
+    die ('account gegevens zijn niet juist');
 }
 
-$_SESSION['userid'] = $user;['id'];
+$_SESSION['user_id'] = $user;['id'];
 
-header("Location: ../../../resources/views/meldingen/index.php");
+header("Location: ../../../resources/views/meldingen/kanban-bord.php");
 ?>
