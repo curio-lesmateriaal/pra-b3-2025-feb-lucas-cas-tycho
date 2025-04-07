@@ -37,6 +37,18 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <div class="kanban-container">
+    <div class="filter-container">
+    <label for="filter-afdeling">Filter op afdeling:</label>
+    <select id="filter-afdeling">
+        <option value="all">Alle afdelingen</option>
+        <option value="Personeel">Personeel</option>
+        <option value="Horeca">Horeca</option>
+        <option value="Techniek">Techniek</option>
+        <option value="Inkoop">Inkoop</option>
+        <option value="Klantenservice">Klantenservice</option>
+        <option value="Groen">Groen</option>
+    </select>
+</div>
         <div class="kanban-board">
             <!-- TO DO Column -->
             <div class="kanban-column">
