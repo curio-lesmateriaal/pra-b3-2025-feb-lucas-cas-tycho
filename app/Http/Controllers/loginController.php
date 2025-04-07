@@ -6,7 +6,7 @@ $password = $_POST['password'];
 
 
 //1. Verbinding
-require_once '../../../backend/conn.php';
+require_once '../../../config/conn.php';
 
 //2. Query
 $query = "SELECT * FROM users WHERE username = :username";
