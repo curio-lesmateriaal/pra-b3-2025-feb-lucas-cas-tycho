@@ -49,6 +49,8 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
         <option value="Groen">Groen</option>
     </select>
 </div>
+
+
         <div class="kanban-board">
             <!-- TO DO Column -->
             <div class="kanban-column">
