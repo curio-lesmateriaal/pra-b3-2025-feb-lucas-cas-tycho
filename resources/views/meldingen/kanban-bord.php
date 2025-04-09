@@ -57,18 +57,6 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <div class="title">
                     <h2>TO DO</h2>
                 </div>
-                <form method="GET" action="">
-    <label for="afdeling">Filter op afdeling:</label>
-    <select name="afdeling" id="afdeling" onchange="this.form.submit()">
-        <option value="">Alle afdelingen</option>
-        <option value="Personeel" <?php if ($_GET['afdeling'] ?? '' === 'Personeel') echo 'selected'; ?>>Personeel</option>
-        <option value="Horeca" <?php if ($_GET['afdeling'] ?? '' === 'Horeca') echo 'selected'; ?>>Horeca</option>
-        <option value="Techniek" <?php if ($_GET['afdeling'] ?? '' === 'Techniek') echo 'selected'; ?>>Techniek</option>
-        <option value="Inkoop" <?php if ($_GET['afdeling'] ?? '' === 'Inkoop') echo 'selected'; ?>>Inkoop</option>
-        <option value="Klantenservice" <?php if ($_GET['afdeling'] ?? '' === 'Klantenservice') echo 'selected'; ?>>Klantenservice</option>
-        <option value="Groen" <?php if ($_GET['afdeling'] ?? '' === 'Groen') echo 'selected'; ?>>Groen</option>
-    </select>
-</form>
 
                 <div class="tasks-container">
                     <?php foreach ($tasks as $task): ?>
