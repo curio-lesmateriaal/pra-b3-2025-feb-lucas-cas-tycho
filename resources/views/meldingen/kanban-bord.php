@@ -43,12 +43,14 @@ if (!isset($_SESSION['user_id'])) {
     </select>
 
     <div class="kanban-container">
+
         <div class="kanban-board">
             <!-- TO DO Column -->
             <div class="kanban-column">
                 <div class="title">
                     <h2>TO DO</h2>
                 </div>
+
                 <div class="tasks-container">
                     <?php foreach ($taken as $task): ?>
                         <?php if ($task['status'] === 'to-do'): ?>
