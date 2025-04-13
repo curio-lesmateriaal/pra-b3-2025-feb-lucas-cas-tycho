@@ -37,7 +37,7 @@ header {
   align-items: center;
   gap: 20px;
   z-index: 1;
-  margin-left: auto; /* Push the menu to the right in the navbar */
+  margin-left: auto;
 }
 
 .menu a {
@@ -162,6 +162,7 @@ form.account-form {
 
 .login-button:first-child {
   background-color: #007bff;
+  padding-bottom: 13px;
 }
 
 .login-button:last-child {
@@ -173,7 +174,7 @@ form.account-form {
 }
 
 .kanban-container {
-  padding: 20px;
+  padding: 10px;
   height: calc(100vh - 70px - 40px);
   display: flex;
   justify-content: center;
@@ -193,7 +194,7 @@ form.account-form {
   min-width: 0;
   border: #3d3f43f9 3px solid;
   padding: 10px;
-  height: 100%;
+  height: 95%;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -226,9 +227,7 @@ form.account-form {
 .task {
   background-color: #19212ef9;
   border: #455268f9 solid 2px;
-  padding-right: 15px;
   padding-left: 15px;
-  
   margin: 10px 0;
   display: flex;
   justify-content: space-between;
@@ -245,6 +244,7 @@ form.account-form {
   flex-direction: column;
   align-items: flex-start;
   gap: 5px;
+  margin-top: 10px;
 }
 
 .task .task-top h3 {
@@ -263,7 +263,7 @@ form.account-form {
   overflow: visible;
 }
 
-.task .delete-button {
+.task .delete-task {
   background: none;
   border: none;
   color: white;
@@ -272,8 +272,8 @@ form.account-form {
   padding: 0 10px;
 }
 
-.task .delete-button:hover {
-  color: #ff0000; /* Rood bij hover */
+.task .delete-task:hover {
+  color: #ff0000;
 }
 
 span {
@@ -463,6 +463,7 @@ button:hover {
 
 .task-button:first-child {
   background-color: #007bff;
+  width: 162px;
 }
 
 .task-button:last-child {
@@ -512,7 +513,7 @@ textarea {
 }
 
 .edit-button,
-.delete-button {
+.delete-task {
     background: none;
     border: none;
     color: white;
@@ -521,8 +522,7 @@ textarea {
     padding: 0 10px;
 }
 
-.edit-button:hover,
-.delete-button:hover {
+.delete-task:hover {
     color: #ff0000;
 }
 .navbar p {
@@ -531,6 +531,34 @@ textarea {
   margin: 0;
   padding: 0;
 }
+
+.edit:hover {
+  color: #007bff;
+}
+
+.task-info{
+  color: rgb(190, 190, 190);
+  font-size: 14px;
+}
+
+.afdeling-task {
+  font-size: 14px;
+  margin: 0;
+  white-space: normal;
+  overflow: visible;
+  margin-left: 43.5% !important;
+  text-align: center;
+  width: 200px;
+  padding: 5px;
+  font-size: 16px;
+  border: 2px solid #455268f9;
+  border-radius: 5px;
+  background-color: #151d2af9;
+  color: white;
+  margin-top: 10px;
+}
+
+
 
 
 
