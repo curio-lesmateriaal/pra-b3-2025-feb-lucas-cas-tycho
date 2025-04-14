@@ -42,6 +42,7 @@ if ($action == "create") {
 
     // 2. Query
     $query = "INSERT INTO taken (titel, beschrijving, afdeling, status, deadline) VALUES(:titel, :beschrijving, :afdeling, :status, :deadline)";
+    
 
     // 3. Prepare
     $statement = $conn->prepare($query);
@@ -143,8 +144,7 @@ if ($action == "delete") {
         ":id" => $id
     ]);
 
-    header("Location: ../../../resources/views/meldingen/kanban-bord.php?msg=Taak is verwijderd");
+    header(header: "Location: ../../../resources/views/meldingen/kanban-bord.php?msg=Taak is verwijderd");
     exit();
 }
-
 ?>

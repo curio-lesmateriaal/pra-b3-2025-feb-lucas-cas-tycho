@@ -1,6 +1,5 @@
 <?php session_start();
-if(!isset($_SESSION['user_id']))
-{
+if (!isset($_SESSION['user_id'])) {
     // $msg = "je moet eerst inloggen!";
     header("Location: ../login/inlog-page.php?msg=je moet eerst inloggen!");
     exit;
@@ -20,14 +19,29 @@ if(!isset($_SESSION['user_id']))
 
 <?php
 // Enable error reporting for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+ini_set(option: 'display_errors', value: 1);
+ini_set(option: 'display_startup_errors', value: 1);
+error_reporting(error_level: E_ALL);
 
 require_once '../../../config/conn.php';
-$query = "SELECT * FROM taken"; // Removed WHERE is_deleted = 0
-$statement = $conn->prepare($query);
-$statement->execute();
+$query = "SELECT * FROM taken ORDER BY deadline DESC"; // Removed WHERE is_deleted = 0
+
+if (!isset($_GET['filter-afdeling'])) {
+    $query = "SELECT * FROM taken  ORDER BY deadline DESC";
+    $statement = $conn->prepare(query: $query);
+    $statement->execute(params: [
+        ]);
+} else {
+    $query = "SELECT * FROM taken WHERE user = :user AND afdeling = :afdeling ORDER BY deadline DESC";
+    $statement = $conn->prepare(query: $query);
+    $statement->execute(params: [
+        ':user' => $_SESSION['user_id'],
+        ':afdeling' => $_GET['afdeling']
+    ]);
+}
+
+// $statement = $conn->prepare($query);
+// $statement->execute();
 $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -37,27 +51,28 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <div class="kanban-container">
-    <div class="filter-container">
-    <label for="filter-afdeling">Filter op afdeling:</label>
-    <select id="filter-afdeling">
-        <option value="all">Alle afdelingen</option>
-        <option value="Personeel">Personeel</option>
-        <option value="Horeca">Horeca</option>
-        <option value="Techniek">Techniek</option>
-        <option value="Inkoop">Inkoop</option>
-        <option value="Klantenservice">Klantenservice</option>
-        <option value="Groen">Groen</option>
-    </select>
-</div>
-
-
+        <div class="filter-container">
+            <form action="" method="GET">
+                <label for="afdeling">Filter op afdeling:</label>
+                <select id="afdeling" onchange="this.form.submit()" name="afdeling" class="form-input">
+                <option value="all"></option>
+                    <option value="User">User</option>
+                    <option value="">Alle afdelingen</option>
+                    <option value="Personeel">Personeel</option>
+                    <option value="Horeca">Horeca</option>
+                    <option value="Techniek">Techniek</option>
+                    <option value="Inkoop">Inkoop</option>
+                    <option value="Klantenservice">Klantenservice</option>
+                    <option value="Groen">Groen</option>
+                </select>
+            </form>
+        </div>
         <div class="kanban-board">
             <!-- TO DO Column -->
             <div class="kanban-column">
                 <div class="title">
                     <h2>TO DO</h2>
                 </div>
-
                 <div class="tasks-container">
                     <?php foreach ($tasks as $task): ?>
                         <?php if ($task['status'] === 'Todo'): ?>
@@ -69,9 +84,11 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                                 <div class="task-actions">
                                     <!-- Edit Button -->
-                                    <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>" class="edit-button">✎</button>
+                                    <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>"
+                                        class="edit-button">✎</button>
                                     <!-- Delete Button -->
-                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST"
+                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php"
+                                        method="POST"
                                         onsubmit="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
@@ -100,7 +117,8 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                             <div class="input-group">
                                 <label for="beschrijving">taak info</label>
-                                <textarea id="beschrijving" name="beschrijving" style="width: 300px; height: 100px; resize: none;" required></textarea>
+                                <textarea id="beschrijving" name="beschrijving"
+                                    style="width: 300px; height: 100px; resize: none;" required></textarea>
                             </div>
                             <label for="afdeling">Afdeling:</label>
                             <div class="afdeling-select">
@@ -113,15 +131,10 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     <option value="Groen">Groen</option>
                                 </select>
                             </div>
-                            
+
                             <label for="deadline">Start date:</label>
-                            <input
-                                type="date"
-                                id="deadline"
-                                name="deadline"
-                                min="2025-01-01"
-                                max="3000-12-31" />
-                          
+                            <input type="date" id="deadline" name="deadline" min="2025-01-01" max="3000-12-31" />
+
                             <div class="buttons task-buttons">
                                 <button type="button" class="task-button" data-close-button>Cancel</button>
                                 <button type="submit" value="Verstuur melding" class="task-button">Add Task</button>
@@ -147,9 +160,11 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                                 <div class="task-actions">
                                     <!-- Edit Button -->
-                                    <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>" class="edit-button">✎</button>
+                                    <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>"
+                                        class="edit-button">✎</button>
                                     <!-- Delete Button -->
-                                    <form action="<?php echo $base_url; ?>/app/  Http/Controllers/tasksController.php" method="POST"
+                                    <form action="<?php echo $base_url; ?>/app/  Http/Controllers/tasksController.php"
+                                        method="POST"
                                         onsubmit="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
@@ -178,9 +193,11 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                                 </div>
                                 <div class="task-actions">
                                     <!-- Edit Button -->
-                                    <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>" class="edit-button">✎</button>
+                                    <button data-modal-target="#modal-edit-<?php echo $task['id']; ?>"
+                                        class="edit-button">✎</button>
                                     <!-- Delete Button -->
-                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php" method="POST"
+                                    <form action="<?php echo $base_url; ?>/app/Http/Controllers/tasksController.php"
+                                        method="POST"
                                         onsubmit="return confirm('Weet je zeker dat je deze taak wilt verwijderen?');">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
@@ -205,39 +222,43 @@ $tasks = $statement->fetchAll(PDO::FETCH_ASSOC);
                         <div class="modal-body">
                             <div class="input-group">
                                 <label for="titel-<?php echo $task['id']; ?>">taak naam</label>
-                                <input type="text" id="titel-<?php echo $task['id']; ?>" name="titel" value="<?php echo $task['titel']; ?>" required>
+                                <input type="text" id="titel-<?php echo $task['id']; ?>" name="titel"
+                                    value="<?php echo $task['titel']; ?>" required>
                             </div>
                             <div class="input-group">
                                 <label for="beschrijving-<?php echo $task['id']; ?>">taak info</label>
-                                <textarea id="beschrijving-<?php echo $task['id']; ?>" name="beschrijving" style="width: 300px; height: 100px; resize: none;" required><?php echo $task['beschrijving']; ?></textarea>
+                                <textarea id="beschrijving-<?php echo $task['id']; ?>" name="beschrijving"
+                                    style="width: 300px; height: 100px; resize: none;"
+                                    required><?php echo $task['beschrijving']; ?></textarea>
                             </div>
                             <label for="afdeling-<?php echo $task['id']; ?>">Afdeling:</label>
                             <div class="afdeling-select">
                                 <select name="afdeling" id="afdeling-<?php echo $task['id']; ?>" class="form-input">
                                     <option value="Personeel" <?php echo $task['afdeling'] == 'Personeel' ? 'selected' : ''; ?>>Personeel</option>
-                                    <option value="Horeca" <?php echo $task['afdeling'] == 'Horeca' ? 'selected' : ''; ?>>Horeca</option>
-                                    <option value="Techniek" <?php echo $task['afdeling'] == 'Techniek' ? 'selected' : ''; ?>>Techniek</option>
-                                    <option value="Inkoop" <?php echo $task['afdeling'] == 'Inkoop' ? 'selected' : ''; ?>>Inkoop</option>
+                                    <option value="Horeca" <?php echo $task['afdeling'] == 'Horeca' ? 'selected' : ''; ?>>
+                                        Horeca</option>
+                                    <option value="Techniek" <?php echo $task['afdeling'] == 'Techniek' ? 'selected' : ''; ?>>
+                                        Techniek</option>
+                                    <option value="Inkoop" <?php echo $task['afdeling'] == 'Inkoop' ? 'selected' : ''; ?>>
+                                        Inkoop</option>
                                     <option value="Klantenservice" <?php echo $task['afdeling'] == 'Klantenservice' ? 'selected' : ''; ?>>Klantenservice</option>
-                                    <option value="Groen" <?php echo $task['afdeling'] == 'Groen' ? 'selected' : ''; ?>>Groen</option>
+                                    <option value="Groen" <?php echo $task['afdeling'] == 'Groen' ? 'selected' : ''; ?>>Groen
+                                    </option>
                                 </select>
                             </div>
                             <label for="status-<?php echo $task['id']; ?>">Status:</label>
                             <div class="afdeling-select">
                                 <select name="status" id="status-<?php echo $task['id']; ?>" class="form-input" required>
-                                    <option value="Todo" <?php echo $task['status'] == 'Todo' ? 'selected' : ''; ?>>Todo</option>
+                                    <option value="Todo" <?php echo $task['status'] == 'Todo' ? 'selected' : ''; ?>>Todo
+                                    </option>
                                     <option value="In Progress" <?php echo $task['status'] == 'In Progress' ? 'selected' : ''; ?>>In Progress</option>
-                                    <option value="Done" <?php echo $task['status'] == 'Done' ? 'selected' : ''; ?>>Done</option>
+                                    <option value="Done" <?php echo $task['status'] == 'Done' ? 'selected' : ''; ?>>Done
+                                    </option>
                                 </select>
                             </div>
                             <label for="deadline-<?php echo $task['id']; ?>">Start date:</label>
-                            <input
-                                type="date"
-                                id="deadline-<?php echo $task['id']; ?>"
-                                name="deadline"
-                                value="<?php echo $task['deadline']; ?>"
-                                min="2025-01-01"
-                                max="3000-12-31" />
+                            <input type="date" id="deadline-<?php echo $task['id']; ?>" name="deadline"
+                                value="<?php echo $task['deadline']; ?>" min="2025-01-01" max="3000-12-31" />
                             <div class="buttons task-buttons">
                                 <button type="button" class="task-button" data-close-button>Cancel</button>
                                 <button type="submit" class="task-button">Save Changes</button>
